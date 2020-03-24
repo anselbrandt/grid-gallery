@@ -1,0 +1,301 @@
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+input {
+  font-size: 1em;
+  outline: none;
+  width: 8em;
+}
+
+select {
+  font-size: 1em;
+  outline: none;
+  width: 6em;
+}
+
+.App-body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+}
+
+.App-header {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  z-index: 100;
+  width: 100vw;
+}
+
+.Header {
+  margin: 0;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+
+.Gallery-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Gallery {
+  margin: 0;
+  padding: 3.25em 0 1em 0;
+  width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+}
+
+.Gallery .Frame {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.Gallery .Content {
+  font-size: 1em;
+  font-weight: bold;
+  text-decoration: none;
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s;
+  background: rgba(90, 0, 10, 0.4);
+  color: white;
+  /* position the text in t’ middle*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Text-wrapper {
+  margin: 1em;
+}
+
+a {
+  color: transparent;
+  text-decoration: none;
+}
+
+.Frame img {
+  position: absolute;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  filter: blur(0px);
+  transition: filter 0.3s ease-in;
+  transform: scale(1.1);
+}
+
+.Gallery .Frame:hover .Content {
+  opacity: 1;
+}
+
+.Gallery .Frame:hover .Image img {
+  filter: blur(2px);
+}
+
+.App-footer {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Footer {
+  margin: 1em;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Footer a {
+  color: darkgrey;
+  text-decoration: none;
+}
+
+.Gallery-single-column {
+  margin: 0;
+  padding: 3.25em 0 1em 0;
+  width: 1000px;
+  display: grid;
+  grid-template-columns: 1;
+  grid-gap: 1em;
+}
+
+.Gallery-single-column .Frame {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.Gallery-single-column .Content {
+  width: 100%;
+  font-size: 1em;
+  /* position the text in t’ middle*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Gallery-single-column .Text-wrapper a {
+  color: darkgray;
+  padding: 0 0 0 3em;
+}
+
+.Post-container {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Post-body {
+  margin: 5em 0 5em 0;
+  padding: 0;
+  width: 600px;
+}
+
+.Post {
+  margin: 0;
+  padding: 0;
+}
+
+.Post-header {
+  margin: 0 0 2em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Post-image {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.Post-image img {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.Post-caption {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.Post-title {
+  margin: 1em 0.5em 0.5em 0.5em;
+  grid-column: span 4;
+}
+
+.Post-author {
+  grid-column: 1;
+  margin: 0 0 0 0.5em;
+}
+.Post-link {
+  grid-column: 4;
+}
+
+.Comments {
+  margin: 0.5em;
+  padding: 0;
+  white-space: pre-wrap;
+}
+
+.Comment {
+  margin: 1em 0 0 0;
+}
+
+.Comment-body {
+  margin: 0.5em 0 0 0;
+}
+
+.Post-body a {
+  color: grey;
+  text-decoration: none;
+}
+
+/* for touch screen devices */
+
+@media (hover: none) {
+  .Gallery .Content {
+    opacity: 0;
+    background: none;
+  }
+  .Gallery-single-column .Content {
+    opacity: 1;
+    background: none;
+  }
+  .Gallery .Text-wrapper {
+    opacity: 0;
+  }
+  .Gallery-single-column .Text-wrapper {
+    opacity: 1;
+  }
+  .Image img {
+    filter: blur(0px);
+  }
+}
+
+/* for narrow screens */
+
+@media (max-width: 1000px) {
+  .Gallery {
+    grid-gap: 0.25em;
+  }
+  .Gallery-single-column {
+    grid-gap: 0.25em;
+  }
+}
+
+@media (max-width: 600px) {
+  .Post-body {
+    margin: 0 0 2em 0;
+    padding: 0;
+    width: 100vw;
+  }
+  .Post-title {
+    margin: 0.5em;
+  }
+  .Post img {
+    width: 100vw;
+  }
+}
+
+[class] {
+  outline: 1px solid transparent;
+}
