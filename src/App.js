@@ -1,32 +1,32 @@
-import React, { useEffect, useState, createRef } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import "./App.css";
+import React, { useEffect, useState, createRef } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import './App.css';
 
-import SearchInput from "./components/SearchInput";
-import Autocomplete from "./components/Autocomplete";
-import SortSelector from "./components/SortSelector";
-import TopSortSelector from "./components/TopSortSelector";
-import LayoutSelector from "./components/LayoutSelector";
-import Listings from "./components/Listings";
-import Footer from "./components/Footer";
-import Loading from "./components/Loading";
-import Post from "./components/Post";
+import SearchInput from './components/SearchInput';
+import Autocomplete from './components/Autocomplete';
+import SortSelector from './components/SortSelector';
+import TopSortSelector from './components/TopSortSelector';
+import LayoutSelector from './components/LayoutSelector';
+import Listings from './components/Listings';
+import Footer from './components/Footer';
+import Loading from './components/Loading';
+import Post from './components/Post';
 
-import useTokenFetch from "./hooks/useTokenFetch";
-import useAutocomplete from "./hooks/useAutocomplete";
-import useListingsFetch from "./hooks/useListingsFetch";
-import usePostFetch from "./hooks/usePostFetch";
+import useTokenFetch from './hooks/useTokenFetch';
+import useAutocomplete from './hooks/useAutocomplete';
+import useListingsFetch from './hooks/useListingsFetch';
+import usePostFetch from './hooks/usePostFetch';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState();
-  const [sortBy, setSortBy] = useState("hot");
+  const [sortBy, setSortBy] = useState('hot');
   const [topSort, setTopSort] = useState(null);
   const [subreddit, setSubreddit] = useState();
   const [displayedListings, setDisplayedListings] = useState([]);
   const [cursor, setCursor] = useState(null);
   const [bottom, setBottom] = useState(null);
   const [postID, setPostID] = useState();
-  const [preferredLayout, setPreferredLayout] = useState("Gallery");
+  const [preferredLayout, setPreferredLayout] = useState('Gallery');
 
   const { token } = useTokenFetch();
   const { autocompleteList } = useAutocomplete(searchTerm, token);
@@ -35,17 +35,17 @@ function App() {
     token,
     sortBy,
     topSort,
-    cursor
+    cursor,
   );
   const { fetchedPost, fetchedComments, isPostLoading } = usePostFetch(
     subreddit,
     postID,
     searchTerm,
-    token
+    token,
   );
 
   useEffect(() => {
-    const names = autocompleteList.map(entry => entry.name.toLowerCase());
+    const names = autocompleteList.map((entry) => entry.name.toLowerCase());
     if (names.includes(searchTerm)) {
       setSubreddit(searchTerm);
     } else {
@@ -57,7 +57,7 @@ function App() {
     setDisplayedListings(fetchedListings);
   }, [fetchedListings]);
 
-  const handleSearch = event => {
+  const handleSearch = (event) => {
     const value = event.currentTarget.value;
     setSearchTerm(value);
     setSubreddit();
@@ -66,23 +66,23 @@ function App() {
     window.scrollTo(0, 0);
   };
 
-  const handleSort = event => {
+  const handleSort = (event) => {
     const id = event.target.selectedIndex;
     setSortBy(event.target[id].value);
     setCursor(null);
     window.scrollTo(0, 0);
-    if (event.target[id].value === "top") {
-      setTopSort("all");
+    if (event.target[id].value === 'top') {
+      setTopSort('all');
     }
   };
-  const handleTopSort = event => {
+  const handleTopSort = (event) => {
     const id = event.target.selectedIndex;
     setTopSort(event.target[id].value);
     setCursor(null);
     window.scrollTo(0, 0);
   };
 
-  const handleLayout = event => {
+  const handleLayout = (event) => {
     const id = event.target.selectedIndex;
     setPreferredLayout(event.target[id].value);
     window.scrollTo(0, 0);
@@ -91,7 +91,7 @@ function App() {
   const bottomObserver = createRef(null);
   useEffect(() => {
     if (isLoading) return;
-    const observer = new IntersectionObserver(entries => {
+    const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         setCursor(next);
       }
@@ -112,12 +112,12 @@ function App() {
     };
   }, [bottom, isLoading, bottomObserver]);
 
-  const handlePost = value => {
+  const handlePost = (value) => {
     setPostID(value);
   };
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/gridgallery">
       <Switch>
         <Route exact path="/">
           <div className="App-body">
@@ -127,7 +127,7 @@ function App() {
                   <SearchInput handleSearch={handleSearch} />
                   <Autocomplete autocompleteList={autocompleteList} />
                   <SortSelector handleSort={handleSort} defaultValue={sortBy} />
-                  {sortBy === "top" && (
+                  {sortBy === 'top' && (
                     <TopSortSelector
                       handleTopSort={handleTopSort}
                       defaultValue={topSort}
@@ -155,11 +155,11 @@ function App() {
             )}
           </div>
         </Route>
-        {fetchedListings.map(post => (
+        {fetchedListings.map((post) => (
           <Route
             key={post.key}
             path={post.route}
-            render={props => (
+            render={(props) => (
               <Post
                 {...props}
                 postData={fetchedPost}

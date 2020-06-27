@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Footer() {
   return (
@@ -13,7 +13,7 @@ export default function Footer() {
         <br></br>
         <div>
           <p>
-            View the code on{" "}
+            View the code on{' '}
             <a href="https://github.com/anselbrandt/reddit-image-browser">
               GitHub
             </a>

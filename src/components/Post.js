@@ -1,5 +1,5 @@
-import React from "react";
-import Markdown from "react-markdown";
+import React from 'react';
+import Markdown from 'react-markdown';
 
 export default function Post(props) {
   return (
@@ -10,8 +10,8 @@ export default function Post(props) {
             <div className="Post-image">
               <a
                 href={props.postData.image}
-                target={"_blank"}
-                rel={"noopener noreferrer"}
+                target={'_blank'}
+                rel={'noopener noreferrer'}
               >
                 <img
                   src={props.postData.preview}
@@ -32,7 +32,7 @@ export default function Post(props) {
               </div>
               <div className="Post-link">
                 {props.isLoading ? (
-                  "Loading..."
+                  'Loading...'
                 ) : (
                   <a href={props.postData.permalink}>(reddit)</a>
                 )}
@@ -40,7 +40,7 @@ export default function Post(props) {
             </div>
           </div>
           <div className="Comments">
-            {props.commentsData.map(comment => (
+            {props.commentsData.map((comment) => (
               <div key={comment.id} className="Comment">
                 <div>
                   <a href={comment.profile}>{comment.author}</a>

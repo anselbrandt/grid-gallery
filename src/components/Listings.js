@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
-import { Link } from "react-router-dom";
+import React, { forwardRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const Listings = forwardRef((props, ref) => {
   const preferredLayout = props.preferredLayout;
@@ -16,14 +16,14 @@ const Listings = forwardRef((props, ref) => {
               >
                 <div className="Frame">
                   <Link to={post.route}>
-                    {preferredLayout === "Gallery" && (
+                    {preferredLayout === 'Gallery' && (
                       <div className="Content">
                         <div className="Text-wrapper">{post.title}</div>
                       </div>
                     )}
                     <img
                       src={
-                        preferredLayout === "Gallery"
+                        preferredLayout === 'Gallery'
                           ? post.preview
                           : post.fullsize
                       }
@@ -31,10 +31,10 @@ const Listings = forwardRef((props, ref) => {
                     />
                   </Link>
                 </div>
-                {preferredLayout === "Gallery-single-column" && (
+                {preferredLayout === 'Gallery-single-column' && (
                   <div className="Content">
                     <div className="Text-wrapper">
-                      {post.title}{" "}
+                      {post.title}{' '}
                       <Link to={post.route}>{post.comments} comments</Link>
                     </div>
                   </div>
@@ -49,14 +49,14 @@ const Listings = forwardRef((props, ref) => {
               >
                 <div className="Frame">
                   <Link to={post.route}>
-                    {preferredLayout === "Gallery" && (
+                    {preferredLayout === 'Gallery' && (
                       <div className="Content">
                         <div className="Text-wrapper">{post.title}</div>
                       </div>
                     )}
                     <img
                       src={
-                        preferredLayout === "Gallery"
+                        preferredLayout === 'Gallery'
                           ? post.preview
                           : post.fullsize
                       }
@@ -64,10 +64,10 @@ const Listings = forwardRef((props, ref) => {
                     />
                   </Link>
                 </div>
-                {preferredLayout === "Gallery-single-column" && (
+                {preferredLayout === 'Gallery-single-column' && (
                   <div className="Content">
                     <div className="Text-wrapper">
-                      {post.title}{" "}
+                      {post.title}{' '}
                       <Link to={post.route}>{post.comments} comments</Link>
                     </div>
                   </div>

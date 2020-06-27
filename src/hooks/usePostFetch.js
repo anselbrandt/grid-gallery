@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function usePostFetch(subreddit, postID, searchTerm, token) {
   const [fetchedPost, setFetchedPost] = useState([]);
@@ -14,13 +14,13 @@ export default function usePostFetch(subreddit, postID, searchTerm, token) {
     setIsPostLoading(true);
 
     const searchParams = new URLSearchParams([
-      ["article", postID],
-      ["context", 8],
-      ["showedits", false],
-      ["showmore", false],
-      ["sort", "top"],
-      ["threaded", false],
-      ["truncate", 50]
+      ['article', postID],
+      ['context', 8],
+      ['showedits', false],
+      ['showmore', false],
+      ['sort', 'top'],
+      ['threaded', false],
+      ['truncate', 50],
     ]);
 
     const controller = new AbortController();
@@ -28,21 +28,21 @@ export default function usePostFetch(subreddit, postID, searchTerm, token) {
       fetch(
         `https://oauth.reddit.com/r/${subreddit}/comments/article/?${searchParams}`,
         {
-          method: "Get",
+          method: 'Get',
           headers: {
-            Authorization: `bearer ${token}`
-          }
-        }
+            Authorization: `bearer ${token}`,
+          },
+        },
       )
-        .then(response => response.json())
-        .then(response => {
+        .then((response) => response.json())
+        .then((response) => {
           const article = response[0].data.children[0];
           const post = () => {
             const title = article.data.title
-              .replace(/\[.*?\]/g, "")
-              .replace(/\(.*?\)/g, "")
-              .replace(/\{.*?\}/g, "")
-              .replace(/amp;/g, "")
+              .replace(/\[.*?\]/g, '')
+              .replace(/\(.*?\)/g, '')
+              .replace(/\{.*?\}/g, '')
+              .replace(/amp;/g, '')
               .trim();
             const permalink = `https://www.reddit.com${article.data.permalink}`;
             const author = article.data.author;
@@ -54,10 +54,10 @@ export default function usePostFetch(subreddit, postID, searchTerm, token) {
             const bestPreview = Math.min(previews.length - 1, 3);
             const preview =
               sourceWidth < 960
-                ? article.data.preview.images[0].source.url.replace(/amp;/g, "")
+                ? article.data.preview.images[0].source.url.replace(/amp;/g, '')
                 : article.data.preview.images[0].resolutions[
                     bestPreview
-                  ].url.replace(/amp;/g, "");
+                  ].url.replace(/amp;/g, '');
             return {
               title: title,
               permalink: permalink,
@@ -66,17 +66,17 @@ export default function usePostFetch(subreddit, postID, searchTerm, token) {
               image: url,
               preview: preview,
               thumbnail: thumbnail,
-              comments: comments
+              comments: comments,
             };
           };
-          const comments = response[1].data.children.map(comment => {
+          const comments = response[1].data.children.map((comment) => {
             const body = comment.data.body
-              .replace(/&amp;#x200B;/g, "")
-              .replace(/&amp;/g, "&")
-              .replace(/&gt;/g, "")
-              .replace(/&lt;/g, "")
-              .replace(/&gte;/g, "")
-              .replace(/&lte;/g, "");
+              .replace(/&amp;#x200B;/g, '')
+              .replace(/&amp;/g, '&')
+              .replace(/&gt;/g, '')
+              .replace(/&lt;/g, '')
+              .replace(/&gte;/g, '')
+              .replace(/&lte;/g, '');
             const id = comment.data.id;
             const author = comment.data.author;
             const profile = `https://www.reddit.com/user/${author}`;
@@ -84,15 +84,15 @@ export default function usePostFetch(subreddit, postID, searchTerm, token) {
               body: body,
               id: id,
               author: author,
-              profile: profile
+              profile: profile,
             };
           });
           setFetchedPost(post);
           setFetchedComments([...comments]);
           setIsPostLoading(false);
         })
-        .catch(error => {
-          if (error.name === "AbortError") return;
+        .catch((error) => {
+          if (error.name === 'AbortError') return;
           else throw error;
         });
     }
