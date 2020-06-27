@@ -1,5 +1,6 @@
 {
   "name": "grid-gallery",
+  "homepage": "https://anselbrandt.com/gridgallery",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
